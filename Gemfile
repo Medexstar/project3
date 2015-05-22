@@ -28,7 +28,9 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 # Use Unicorn as the app server
 # gem 'unicorn'
+gem 'rufus-scheduler', '~> 3.1.1'
 
+gem 'nokogiri', '~> 1.6.6.2'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: 
+  lat: 1.5
+  long: 1.5
+  postcode: 
+
+two:
+  name: 
+  lat: 1.5
+  long: 1.5
+  postcode: 
