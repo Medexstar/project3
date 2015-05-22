@@ -5,7 +5,7 @@ class CreateMeasurements < ActiveRecord::Migration
       t.float :precip_intensity
       t.float :wind_speed
       t.float :wind_direction
-      t.datetime :time
+      t.datetime :timestamp
       t.references :location
 
       t.timestamps null: false
