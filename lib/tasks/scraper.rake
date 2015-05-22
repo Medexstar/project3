@@ -27,4 +27,8 @@ namespace :scrape do
 			location.save if location.changed?
 		end
 	end
+  
+  #Scrape data from forecast into DB
+  task :forecast => :environment do
+  end
 end

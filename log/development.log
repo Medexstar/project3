@@ -503,3 +503,441 @@ Migrating to CreatePredictions (20150521061611)
   [1m[36mSQL (1.0ms)[0m  [1mINSERT INTO "locations" ("name", "lat", "long", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "Barwon Downs"], ["lat", -38.46], ["long", 143.76], ["created_at", "2015-05-22 09:45:00.234787"], ["updated_at", "2015-05-22 09:45:00.234787"]]
   [1m[35m (78.0ms)[0m  commit transaction
   [1m[36mLocation Load (2.0ms)[0m  [1mSELECT "locations".* FROM "locations"[0m
+  [1m[36m (96.0ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL) [0m
+  [1m[35m (1.0ms)[0m  select sqlite_version(*)
+  [1m[36m (92.0ms)[0m  [1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.0ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+Migrating to CreateLocations (20150521055514)
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (1.0ms)[0m  CREATE TABLE "locations" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "lat" float, "long" float, "postcode" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20150521055514"]]
+  [1m[35m (87.0ms)[0m  commit transaction
+Migrating to CreateRegressions (20150521061102)
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (1.0ms)[0m  CREATE TABLE "regressions" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "r_sqrd" float, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20150521061102"]]
+  [1m[35m (81.0ms)[0m  commit transaction
+Migrating to CreateMeasurements (20150521061254)
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (1.0ms)[0m  CREATE TABLE "measurements" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "temp" float, "precip_intensity" float, "wind_speed" float, "wind_direction" float, "time" datetime, "location_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20150521061254"]]
+  [1m[35m (90.0ms)[0m  commit transaction
+Migrating to CreatePredictions (20150521061611)
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (1.0ms)[0m  CREATE TABLE "predictions" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20150521061611"]]
+  [1m[35m (85.0ms)[0m  commit transaction
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35mLocation Load (0.0ms)[0m  SELECT  "locations".* FROM "locations" WHERE "locations"."name" = ? LIMIT 1  [["name", "Charlton"]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "locations" ("name", "lat", "long", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Charlton"], ["lat", -36.28], ["long", 143.33], ["created_at", "2015-05-22 09:52:52.935824"], ["updated_at", "2015-05-22 09:52:52.935824"]]
+  [1m[36m (83.0ms)[0m  [1mcommit transaction[0m
+  [1m[35mLocation Load (0.0ms)[0m  SELECT  "locations".* FROM "locations" WHERE "locations"."name" = ? LIMIT 1  [["name", "Hopetoun Airport"]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "locations" ("name", "lat", "long", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Hopetoun Airport"], ["lat", -35.72], ["long", 142.36], ["created_at", "2015-05-22 09:52:53.260842"], ["updated_at", "2015-05-22 09:52:53.260842"]]
+  [1m[36m (85.0ms)[0m  [1mcommit transaction[0m
+  [1m[35mLocation Load (0.0ms)[0m  SELECT  "locations".* FROM "locations" WHERE "locations"."name" = ? LIMIT 1  [["name", "Kerang"]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "locations" ("name", "lat", "long", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Kerang"], ["lat", -35.72], ["long", 143.92], ["created_at", "2015-05-22 09:52:53.511857"], ["updated_at", "2015-05-22 09:52:53.511857"]]
+  [1m[36m (91.0ms)[0m  [1mcommit transaction[0m
+  [1m[35mLocation Load (0.0ms)[0m  SELECT  "locations".* FROM "locations" WHERE "locations"."name" = ? LIMIT 1  [["name", "Mildura"]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "locations" ("name", "lat", "long", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Mildura"], ["lat", -34.24], ["long", 142.09], ["created_at", "2015-05-22 09:52:54.183895"], ["updated_at", "2015-05-22 09:52:54.183895"]]
+  [1m[36m (86.0ms)[0m  [1mcommit transaction[0m
+  [1m[35mLocation Load (0.0ms)[0m  SELECT  "locations".* FROM "locations" WHERE "locations"."name" = ? LIMIT 1  [["name", "Ouyen"]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "locations" ("name", "lat", "long", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Ouyen"], ["lat", -35.07], ["long", 142.31], ["created_at", "2015-05-22 09:52:54.412908"], ["updated_at", "2015-05-22 09:52:54.412908"]]
+  [1m[36m (90.0ms)[0m  [1mcommit transaction[0m
+  [1m[35mLocation Load (0.0ms)[0m  SELECT  "locations".* FROM "locations" WHERE "locations"."name" = ? LIMIT 1  [["name", "Swan Hill"]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "locations" ("name", "lat", "long", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Swan Hill"], ["lat", -35.38], ["long", 143.54], ["created_at", "2015-05-22 09:52:54.796930"], ["updated_at", "2015-05-22 09:52:54.796930"]]
+  [1m[36m (114.0ms)[0m  [1mcommit transaction[0m
+  [1m[35mLocation Load (0.0ms)[0m  SELECT  "locations".* FROM "locations" WHERE "locations"."name" = ? LIMIT 1  [["name", "Walpeup RS"]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "locations" ("name", "lat", "long", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Walpeup RS"], ["lat", -35.12], ["long", 142.0], ["created_at", "2015-05-22 09:52:55.290958"], ["updated_at", "2015-05-22 09:52:55.290958"]]
+  [1m[36m (79.0ms)[0m  [1mcommit transaction[0m
+  [1m[35mLocation Load (1.0ms)[0m  SELECT  "locations".* FROM "locations" WHERE "locations"."name" = ? LIMIT 1  [["name", "Edenhope"]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "locations" ("name", "lat", "long", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Edenhope"], ["lat", -37.02], ["long", 141.27], ["created_at", "2015-05-22 09:52:55.591976"], ["updated_at", "2015-05-22 09:52:55.591976"]]
+  [1m[36m (70.0ms)[0m  [1mcommit transaction[0m
+  [1m[35mLocation Load (0.0ms)[0m  SELECT  "locations".* FROM "locations" WHERE "locations"."name" = ? LIMIT 1  [["name", "Horsham"]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "locations" ("name", "lat", "long", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Horsham"], ["lat", -36.67], ["long", 142.17], ["created_at", "2015-05-22 09:52:56.033001"], ["updated_at", "2015-05-22 09:52:56.033001"]]
+  [1m[36m (111.0ms)[0m  [1mcommit transaction[0m
+  [1m[35mLocation Load (0.0ms)[0m  SELECT  "locations".* FROM "locations" WHERE "locations"."name" = ? LIMIT 1  [["name", "Kanagulk"]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "locations" ("name", "lat", "long", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Kanagulk"], ["lat", -37.12], ["long", 141.8], ["created_at", "2015-05-22 09:52:56.778043"], ["updated_at", "2015-05-22 09:52:56.778043"]]
+  [1m[36m (76.0ms)[0m  [1mcommit transaction[0m
+  [1m[35mLocation Load (0.0ms)[0m  SELECT  "locations".* FROM "locations" WHERE "locations"."name" = ? LIMIT 1  [["name", "Longerenong"]]
+  [1m[36m (1.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "locations" ("name", "lat", "long", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Longerenong"], ["lat", -36.67], ["long", 142.3], ["created_at", "2015-05-22 09:52:58.908165"], ["updated_at", "2015-05-22 09:52:58.908165"]]
+  [1m[36m (69.0ms)[0m  [1mcommit transaction[0m
+  [1m[35mLocation Load (0.0ms)[0m  SELECT  "locations".* FROM "locations" WHERE "locations"."name" = ? LIMIT 1  [["name", "Nhill Aerodrome"]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "locations" ("name", "lat", "long", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Nhill Aerodrome"], ["lat", -36.31], ["long", 141.65], ["created_at", "2015-05-22 09:52:59.484198"], ["updated_at", "2015-05-22 09:52:59.484198"]]
+  [1m[36m (78.0ms)[0m  [1mcommit transaction[0m
+  [1m[35mLocation Load (1.0ms)[0m  SELECT  "locations".* FROM "locations" WHERE "locations"."name" = ? LIMIT 1  [["name", "Stawell"]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "locations" ("name", "lat", "long", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Stawell"], ["lat", -37.07], ["long", 142.74], ["created_at", "2015-05-22 09:52:59.823218"], ["updated_at", "2015-05-22 09:52:59.823218"]]
+  [1m[36m (71.0ms)[0m  [1mcommit transaction[0m
+  [1m[35mLocation Load (0.0ms)[0m  SELECT  "locations".* FROM "locations" WHERE "locations"."name" = ? LIMIT 1  [["name", "Warracknabeal"]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "locations" ("name", "lat", "long", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Warracknabeal"], ["lat", -36.26], ["long", 142.41], ["created_at", "2015-05-22 09:53:00.046230"], ["updated_at", "2015-05-22 09:53:00.046230"]]
+  [1m[36m (74.0ms)[0m  [1mcommit transaction[0m
+  [1m[35mLocation Load (0.0ms)[0m  SELECT  "locations".* FROM "locations" WHERE "locations"."name" = ? LIMIT 1  [["name", "Ararat"]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "locations" ("name", "lat", "long", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Ararat"], ["lat", -37.28], ["long", 142.98], ["created_at", "2015-05-22 09:53:00.261243"], ["updated_at", "2015-05-22 09:53:00.261243"]]
+  [1m[36m (76.0ms)[0m  [1mcommit transaction[0m
+  [1m[35mLocation Load (0.0ms)[0m  SELECT  "locations".* FROM "locations" WHERE "locations"."name" = ? LIMIT 1  [["name", "Ben Nevis"]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "locations" ("name", "lat", "long", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Ben Nevis"], ["lat", -37.23], ["long", 143.2], ["created_at", "2015-05-22 09:53:00.627264"], ["updated_at", "2015-05-22 09:53:00.627264"]]
+  [1m[36m (75.0ms)[0m  [1mcommit transaction[0m
+  [1m[35mLocation Load (0.0ms)[0m  SELECT  "locations".* FROM "locations" WHERE "locations"."name" = ? LIMIT 1  [["name", "Cape Nelson"]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "locations" ("name", "lat", "long", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Cape Nelson"], ["lat", -38.43], ["long", 141.54], ["created_at", "2015-05-22 09:53:00.970283"], ["updated_at", "2015-05-22 09:53:00.970283"]]
+  [1m[36m (75.0ms)[0m  [1mcommit transaction[0m
+  [1m[35mLocation Load (1.0ms)[0m  SELECT  "locations".* FROM "locations" WHERE "locations"."name" = ? LIMIT 1  [["name", "Cape Otway"]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "locations" ("name", "lat", "long", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Cape Otway"], ["lat", -38.86], ["long", 143.51], ["created_at", "2015-05-22 09:53:01.370306"], ["updated_at", "2015-05-22 09:53:01.370306"]]
+  [1m[36m (73.0ms)[0m  [1mcommit transaction[0m
+  [1m[35mLocation Load (0.0ms)[0m  SELECT  "locations".* FROM "locations" WHERE "locations"."name" = ? LIMIT 1  [["name", "Casterton"]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "locations" ("name", "lat", "long", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Casterton"], ["lat", -37.58], ["long", 141.33], ["created_at", "2015-05-22 09:53:01.895336"], ["updated_at", "2015-05-22 09:53:01.895336"]]
+  [1m[36m (74.0ms)[0m  [1mcommit transaction[0m
+  [1m[35mLocation Load (1.0ms)[0m  SELECT  "locations".* FROM "locations" WHERE "locations"."name" = ? LIMIT 1  [["name", "Dartmoor"]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "locations" ("name", "lat", "long", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Dartmoor"], ["lat", -37.92], ["long", 141.26], ["created_at", "2015-05-22 09:53:02.206354"], ["updated_at", "2015-05-22 09:53:02.206354"]]
+  [1m[36m (71.0ms)[0m  [1mcommit transaction[0m
+  [1m[35mLocation Load (0.0ms)[0m  SELECT  "locations".* FROM "locations" WHERE "locations"."name" = ? LIMIT 1  [["name", "Hamilton"]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "locations" ("name", "lat", "long", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Hamilton"], ["lat", -37.65], ["long", 142.06], ["created_at", "2015-05-22 09:53:02.816389"], ["updated_at", "2015-05-22 09:53:02.816389"]]
+  [1m[36m (79.0ms)[0m  [1mcommit transaction[0m
+  [1m[35mLocation Load (0.0ms)[0m  SELECT  "locations".* FROM "locations" WHERE "locations"."name" = ? LIMIT 1  [["name", "Mortlake"]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "locations" ("name", "lat", "long", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Mortlake"], ["lat", -38.07], ["long", 142.77], ["created_at", "2015-05-22 09:53:03.255414"], ["updated_at", "2015-05-22 09:53:03.255414"]]
+  [1m[36m (72.0ms)[0m  [1mcommit transaction[0m
+  [1m[35mLocation Load (0.0ms)[0m  SELECT  "locations".* FROM "locations" WHERE "locations"."name" = ? LIMIT 1  [["name", "Mount Gellibrand"]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "locations" ("name", "lat", "long", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Mount Gellibrand"], ["lat", -38.23], ["long", 143.79], ["created_at", "2015-05-22 09:53:03.589433"], ["updated_at", "2015-05-22 09:53:03.589433"]]
+  [1m[36m (72.0ms)[0m  [1mcommit transaction[0m
+  [1m[35mLocation Load (1.0ms)[0m  SELECT  "locations".* FROM "locations" WHERE "locations"."name" = ? LIMIT 1  [["name", "Mount William"]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "locations" ("name", "lat", "long", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Mount William"], ["lat", -37.3], ["long", 142.6], ["created_at", "2015-05-22 09:53:03.896451"], ["updated_at", "2015-05-22 09:53:03.896451"]]
+  [1m[36m (73.0ms)[0m  [1mcommit transaction[0m
+  [1m[35mLocation Load (0.0ms)[0m  SELECT  "locations".* FROM "locations" WHERE "locations"."name" = ? LIMIT 1  [["name", "Port Fairy"]]
+  [1m[36m (1.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "locations" ("name", "lat", "long", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Port Fairy"], ["lat", -38.39], ["long", 142.23], ["created_at", "2015-05-22 09:53:04.441482"], ["updated_at", "2015-05-22 09:53:04.441482"]]
+  [1m[36m (71.0ms)[0m  [1mcommit transaction[0m
+  [1m[35mLocation Load (0.0ms)[0m  SELECT  "locations".* FROM "locations" WHERE "locations"."name" = ? LIMIT 1  [["name", "Portland Airport"]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "locations" ("name", "lat", "long", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Portland Airport"], ["lat", -38.31], ["long", 141.47], ["created_at", "2015-05-22 09:53:05.081518"], ["updated_at", "2015-05-22 09:53:05.081518"]]
+  [1m[36m (71.0ms)[0m  [1mcommit transaction[0m
+  [1m[35mLocation Load (0.0ms)[0m  SELECT  "locations".* FROM "locations" WHERE "locations"."name" = ? LIMIT 1  [["name", "Portland Harbour"]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "locations" ("name", "lat", "long", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Portland Harbour"], ["lat", -38.34], ["long", 141.61], ["created_at", "2015-05-22 09:53:05.447539"], ["updated_at", "2015-05-22 09:53:05.447539"]]
+  [1m[36m (75.0ms)[0m  [1mcommit transaction[0m
+  [1m[35mLocation Load (0.0ms)[0m  SELECT  "locations".* FROM "locations" WHERE "locations"."name" = ? LIMIT 1  [["name", "Warrnambool"]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "locations" ("name", "lat", "long", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Warrnambool"], ["lat", -38.29], ["long", 142.45], ["created_at", "2015-05-22 09:53:06.411594"], ["updated_at", "2015-05-22 09:53:06.411594"]]
+  [1m[36m (81.0ms)[0m  [1mcommit transaction[0m
+  [1m[35mLocation Load (0.0ms)[0m  SELECT  "locations".* FROM "locations" WHERE "locations"."name" = ? LIMIT 1  [["name", "Westmere"]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "locations" ("name", "lat", "long", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Westmere"], ["lat", -37.71], ["long", 142.94], ["created_at", "2015-05-22 09:53:07.642665"], ["updated_at", "2015-05-22 09:53:07.642665"]]
+  [1m[36m (78.0ms)[0m  [1mcommit transaction[0m
+  [1m[35mLocation Load (1.0ms)[0m  SELECT  "locations".* FROM "locations" WHERE "locations"."name" = ? LIMIT 1  [["name", "Aireys Inlet"]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "locations" ("name", "lat", "long", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Aireys Inlet"], ["lat", -38.46], ["long", 144.09], ["created_at", "2015-05-22 09:53:07.964683"], ["updated_at", "2015-05-22 09:53:07.964683"]]
+  [1m[36m (87.0ms)[0m  [1mcommit transaction[0m
+  [1m[35mLocation Load (0.0ms)[0m  SELECT  "locations".* FROM "locations" WHERE "locations"."name" = ? LIMIT 1  [["name", "Avalon"]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "locations" ("name", "lat", "long", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Avalon"], ["lat", -38.03], ["long", 144.48], ["created_at", "2015-05-22 09:53:08.786730"], ["updated_at", "2015-05-22 09:53:08.786730"]]
+  [1m[36m (74.0ms)[0m  [1mcommit transaction[0m
+  [1m[35mLocation Load (0.0ms)[0m  SELECT  "locations".* FROM "locations" WHERE "locations"."name" = ? LIMIT 1  [["name", "Ballarat"]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "locations" ("name", "lat", "long", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Ballarat"], ["lat", -37.51], ["long", 143.79], ["created_at", "2015-05-22 09:53:09.592776"], ["updated_at", "2015-05-22 09:53:09.592776"]]
+  [1m[36m (86.0ms)[0m  [1mcommit transaction[0m
+  [1m[35mLocation Load (0.0ms)[0m  SELECT  "locations".* FROM "locations" WHERE "locations"."name" = ? LIMIT 1  [["name", "Bundoora"]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "locations" ("name", "lat", "long", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Bundoora"], ["lat", -37.72], ["long", 145.05], ["created_at", "2015-05-22 09:53:09.860792"], ["updated_at", "2015-05-22 09:53:09.860792"]]
+  [1m[36m (75.0ms)[0m  [1mcommit transaction[0m
+  [1m[35mLocation Load (1.0ms)[0m  SELECT  "locations".* FROM "locations" WHERE "locations"."name" = ? LIMIT 1  [["name", "Cerberus"]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "locations" ("name", "lat", "long", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Cerberus"], ["lat", -38.36], ["long", 145.18], ["created_at", "2015-05-22 09:53:10.194811"], ["updated_at", "2015-05-22 09:53:10.194811"]]
+  [1m[36m (75.0ms)[0m  [1mcommit transaction[0m
+  [1m[35mLocation Load (1.0ms)[0m  SELECT  "locations".* FROM "locations" WHERE "locations"."name" = ? LIMIT 1  [["name", "Coldstream"]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "locations" ("name", "lat", "long", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Coldstream"], ["lat", -37.72], ["long", 145.41], ["created_at", "2015-05-22 09:53:10.546831"], ["updated_at", "2015-05-22 09:53:10.546831"]]
+  [1m[36m (74.0ms)[0m  [1mcommit transaction[0m
+  [1m[35mLocation Load (0.0ms)[0m  SELECT  "locations".* FROM "locations" WHERE "locations"."name" = ? LIMIT 1  [["name", "Essendon Airport"]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "locations" ("name", "lat", "long", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Essendon Airport"], ["lat", -37.73], ["long", 144.91], ["created_at", "2015-05-22 09:53:10.912852"], ["updated_at", "2015-05-22 09:53:10.912852"]]
+  [1m[36m (74.0ms)[0m  [1mcommit transaction[0m
+  [1m[35mLocation Load (0.0ms)[0m  SELECT  "locations".* FROM "locations" WHERE "locations"."name" = ? LIMIT 1  [["name", "Fawkner Beacon"]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "locations" ("name", "lat", "long", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Fawkner Beacon"], ["lat", -37.91], ["long", 144.93], ["created_at", "2015-05-22 09:53:11.191868"], ["updated_at", "2015-05-22 09:53:11.191868"]]
+  [1m[36m (73.0ms)[0m  [1mcommit transaction[0m
+  [1m[35mLocation Load (0.0ms)[0m  SELECT  "locations".* FROM "locations" WHERE "locations"."name" = ? LIMIT 1  [["name", "Ferny Creek"]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "locations" ("name", "lat", "long", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Ferny Creek"], ["lat", -37.87], ["long", 145.35], ["created_at", "2015-05-22 09:53:11.517886"], ["updated_at", "2015-05-22 09:53:11.517886"]]
+  [1m[36m (76.0ms)[0m  [1mcommit transaction[0m
+  [1m[35mLocation Load (0.0ms)[0m  SELECT  "locations".* FROM "locations" WHERE "locations"."name" = ? LIMIT 1  [["name", "Frankston"]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "locations" ("name", "lat", "long", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Frankston"], ["lat", -38.15], ["long", 145.12], ["created_at", "2015-05-22 09:53:12.045917"], ["updated_at", "2015-05-22 09:53:12.045917"]]
+  [1m[36m (75.0ms)[0m  [1mcommit transaction[0m
+  [1m[35mLocation Load (0.0ms)[0m  SELECT  "locations".* FROM "locations" WHERE "locations"."name" = ? LIMIT 1  [["name", "Geelong Racecourse"]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "locations" ("name", "lat", "long", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Geelong Racecourse"], ["lat", -38.17], ["long", 144.38], ["created_at", "2015-05-22 09:53:12.361935"], ["updated_at", "2015-05-22 09:53:12.361935"]]
+  [1m[36m (77.0ms)[0m  [1mcommit transaction[0m
+  [1m[35mLocation Load (0.0ms)[0m  SELECT  "locations".* FROM "locations" WHERE "locations"."name" = ? LIMIT 1  [["name", "Laverton"]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "locations" ("name", "lat", "long", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Laverton"], ["lat", -37.86], ["long", 144.76], ["created_at", "2015-05-22 09:53:13.037973"], ["updated_at", "2015-05-22 09:53:13.037973"]]
+  [1m[36m (73.0ms)[0m  [1mcommit transaction[0m
+  [1m[35mLocation Load (0.0ms)[0m  SELECT  "locations".* FROM "locations" WHERE "locations"."name" = ? LIMIT 1  [["name", "Melbourne Airport"]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "locations" ("name", "lat", "long", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Melbourne Airport"], ["lat", -37.67], ["long", 144.83], ["created_at", "2015-05-22 09:53:13.388994"], ["updated_at", "2015-05-22 09:53:13.388994"]]
+  [1m[36m (72.0ms)[0m  [1mcommit transaction[0m
+  [1m[35mLocation Load (0.0ms)[0m  SELECT  "locations".* FROM "locations" WHERE "locations"."name" = ? LIMIT 1  [["name", "Melbourne (Olympic Park)"]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "locations" ("name", "lat", "long", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Melbourne (Olympic Park)"], ["lat", -37.83], ["long", 144.98], ["created_at", "2015-05-22 09:53:13.912023"], ["updated_at", "2015-05-22 09:53:13.912023"]]
+  [1m[36m (74.0ms)[0m  [1mcommit transaction[0m
+  [1m[35mLocation Load (0.0ms)[0m  SELECT  "locations".* FROM "locations" WHERE "locations"."name" = ? LIMIT 1  [["name", "Moorabbin Airport"]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "locations" ("name", "lat", "long", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Moorabbin Airport"], ["lat", -37.98], ["long", 145.1], ["created_at", "2015-05-22 09:53:14.576061"], ["updated_at", "2015-05-22 09:53:14.576061"]]
+  [1m[36m (76.0ms)[0m  [1mcommit transaction[0m
+  [1m[35mLocation Load (0.0ms)[0m  SELECT  "locations".* FROM "locations" WHERE "locations"."name" = ? LIMIT 1  [["name", "Phillip Island"]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "locations" ("name", "lat", "long", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Phillip Island"], ["lat", -38.51], ["long", 145.15], ["created_at", "2015-05-22 09:53:14.798074"], ["updated_at", "2015-05-22 09:53:14.798074"]]
+  [1m[36m (70.0ms)[0m  [1mcommit transaction[0m
+  [1m[35mLocation Load (0.0ms)[0m  SELECT  "locations".* FROM "locations" WHERE "locations"."name" = ? LIMIT 1  [["name", "Point Wilson"]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "locations" ("name", "lat", "long", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Point Wilson"], ["lat", -38.1], ["long", 144.54], ["created_at", "2015-05-22 09:53:15.048088"], ["updated_at", "2015-05-22 09:53:15.048088"]]
+  [1m[36m (72.0ms)[0m  [1mcommit transaction[0m
+  [1m[35mLocation Load (0.0ms)[0m  SELECT  "locations".* FROM "locations" WHERE "locations"."name" = ? LIMIT 1  [["name", "Pound Creek"]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "locations" ("name", "lat", "long", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Pound Creek"], ["lat", -38.63], ["long", 145.81], ["created_at", "2015-05-22 09:53:15.482113"], ["updated_at", "2015-05-22 09:53:15.482113"]]
+  [1m[36m (69.0ms)[0m  [1mcommit transaction[0m
+  [1m[35mLocation Load (1.0ms)[0m  SELECT  "locations".* FROM "locations" WHERE "locations"."name" = ? LIMIT 1  [["name", "Rhyll"]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "locations" ("name", "lat", "long", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Rhyll"], ["lat", -38.46], ["long", 145.31], ["created_at", "2015-05-22 09:53:15.876136"], ["updated_at", "2015-05-22 09:53:15.876136"]]
+  [1m[36m (77.0ms)[0m  [1mcommit transaction[0m
+  [1m[35mLocation Load (0.0ms)[0m  SELECT  "locations".* FROM "locations" WHERE "locations"."name" = ? LIMIT 1  [["name", "Scoresby"]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "locations" ("name", "lat", "long", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Scoresby"], ["lat", -37.87], ["long", 145.26], ["created_at", "2015-05-22 09:53:16.316161"], ["updated_at", "2015-05-22 09:53:16.316161"]]
+  [1m[36m (68.0ms)[0m  [1mcommit transaction[0m
+  [1m[35mLocation Load (0.0ms)[0m  SELECT  "locations".* FROM "locations" WHERE "locations"."name" = ? LIMIT 1  [["name", "Sheoaks"]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "locations" ("name", "lat", "long", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Sheoaks"], ["lat", -37.91], ["long", 144.13], ["created_at", "2015-05-22 09:53:16.599177"], ["updated_at", "2015-05-22 09:53:16.599177"]]
+  [1m[36m (78.0ms)[0m  [1mcommit transaction[0m
+  [1m[35mLocation Load (0.0ms)[0m  SELECT  "locations".* FROM "locations" WHERE "locations"."name" = ? LIMIT 1  [["name", "South Channel Island"]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "locations" ("name", "lat", "long", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "South Channel Island"], ["lat", -38.31], ["long", 144.8], ["created_at", "2015-05-22 09:53:16.878193"], ["updated_at", "2015-05-22 09:53:16.878193"]]
+  [1m[36m (73.0ms)[0m  [1mcommit transaction[0m
+  [1m[35mLocation Load (0.0ms)[0m  SELECT  "locations".* FROM "locations" WHERE "locations"."name" = ? LIMIT 1  [["name", "St Kilda Harbour RMYS"]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "locations" ("name", "lat", "long", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "St Kilda Harbour RMYS"], ["lat", -37.86], ["long", 144.96], ["created_at", "2015-05-22 09:53:17.135208"], ["updated_at", "2015-05-22 09:53:17.135208"]]
+  [1m[36m (77.0ms)[0m  [1mcommit transaction[0m
+  [1m[35mLocation Load (0.0ms)[0m  SELECT  "locations".* FROM "locations" WHERE "locations"."name" = ? LIMIT 1  [["name", "Viewbank"]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "locations" ("name", "lat", "long", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Viewbank"], ["lat", -37.74], ["long", 145.1], ["created_at", "2015-05-22 09:53:17.437225"], ["updated_at", "2015-05-22 09:53:17.437225"]]
+  [1m[36m (73.0ms)[0m  [1mcommit transaction[0m
+  [1m[35mLocation Load (0.0ms)[0m  SELECT  "locations".* FROM "locations" WHERE "locations"."name" = ? LIMIT 1  [["name", "Wonthaggi"]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "locations" ("name", "lat", "long", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Wonthaggi"], ["lat", -38.61], ["long", 145.6], ["created_at", "2015-05-22 09:53:17.643237"], ["updated_at", "2015-05-22 09:53:17.643237"]]
+  [1m[36m (77.0ms)[0m  [1mcommit transaction[0m
+  [1m[35mLocation Load (0.0ms)[0m  SELECT  "locations".* FROM "locations" WHERE "locations"."name" = ? LIMIT 1  [["name", "Bendigo"]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "locations" ("name", "lat", "long", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Bendigo"], ["lat", -36.74], ["long", 144.33], ["created_at", "2015-05-22 09:53:17.937254"], ["updated_at", "2015-05-22 09:53:17.937254"]]
+  [1m[36m (73.0ms)[0m  [1mcommit transaction[0m
+  [1m[35mLocation Load (0.0ms)[0m  SELECT  "locations".* FROM "locations" WHERE "locations"."name" = ? LIMIT 1  [["name", "Echuca"]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "locations" ("name", "lat", "long", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Echuca"], ["lat", -36.16], ["long", 144.76], ["created_at", "2015-05-22 09:53:18.142265"], ["updated_at", "2015-05-22 09:53:18.142265"]]
+  [1m[36m (81.0ms)[0m  [1mcommit transaction[0m
+  [1m[35mLocation Load (0.0ms)[0m  SELECT  "locations".* FROM "locations" WHERE "locations"."name" = ? LIMIT 1  [["name", "Kyabram"]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "locations" ("name", "lat", "long", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Kyabram"], ["lat", -36.34], ["long", 145.06], ["created_at", "2015-05-22 09:53:18.477285"], ["updated_at", "2015-05-22 09:53:18.477285"]]
+  [1m[36m (74.0ms)[0m  [1mcommit transaction[0m
+  [1m[35mLocation Load (0.0ms)[0m  SELECT  "locations".* FROM "locations" WHERE "locations"."name" = ? LIMIT 1  [["name", "Mangalore"]]
+  [1m[36m (1.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "locations" ("name", "lat", "long", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Mangalore"], ["lat", -36.89], ["long", 145.19], ["created_at", "2015-05-22 09:53:18.774302"], ["updated_at", "2015-05-22 09:53:18.774302"]]
+  [1m[36m (79.0ms)[0m  [1mcommit transaction[0m
+  [1m[35mLocation Load (1.0ms)[0m  SELECT  "locations".* FROM "locations" WHERE "locations"."name" = ? LIMIT 1  [["name", "Redesdale"]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "locations" ("name", "lat", "long", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Redesdale"], ["lat", -37.02], ["long", 144.52], ["created_at", "2015-05-22 09:53:19.064318"], ["updated_at", "2015-05-22 09:53:19.064318"]]
+  [1m[36m (71.0ms)[0m  [1mcommit transaction[0m
+  [1m[35mLocation Load (0.0ms)[0m  SELECT  "locations".* FROM "locations" WHERE "locations"."name" = ? LIMIT 1  [["name", "Shepparton"]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "locations" ("name", "lat", "long", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Shepparton"], ["lat", -36.43], ["long", 145.39], ["created_at", "2015-05-22 09:53:19.348334"], ["updated_at", "2015-05-22 09:53:19.348334"]]
+  [1m[36m (80.0ms)[0m  [1mcommit transaction[0m
+  [1m[35mLocation Load (0.0ms)[0m  SELECT  "locations".* FROM "locations" WHERE "locations"."name" = ? LIMIT 1  [["name", "Strathbogie"]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "locations" ("name", "lat", "long", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Strathbogie"], ["lat", -36.85], ["long", 145.73], ["created_at", "2015-05-22 09:53:19.603349"], ["updated_at", "2015-05-22 09:53:19.603349"]]
+  [1m[36m (65.0ms)[0m  [1mcommit transaction[0m
+  [1m[35mLocation Load (0.0ms)[0m  SELECT  "locations".* FROM "locations" WHERE "locations"."name" = ? LIMIT 1  [["name", "Tatura"]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "locations" ("name", "lat", "long", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Tatura"], ["lat", -36.44], ["long", 145.27], ["created_at", "2015-05-22 09:53:20.025373"], ["updated_at", "2015-05-22 09:53:20.025373"]]
+  [1m[36m (68.0ms)[0m  [1mcommit transaction[0m
+  [1m[35mLocation Load (1.0ms)[0m  SELECT  "locations".* FROM "locations" WHERE "locations"."name" = ? LIMIT 1  [["name", "Yarrawonga"]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "locations" ("name", "lat", "long", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Yarrawonga"], ["lat", -36.03], ["long", 146.03], ["created_at", "2015-05-22 09:53:20.450397"], ["updated_at", "2015-05-22 09:53:20.450397"]]
+  [1m[36m (81.0ms)[0m  [1mcommit transaction[0m
+  [1m[35mLocation Load (1.0ms)[0m  SELECT  "locations".* FROM "locations" WHERE "locations"."name" = ? LIMIT 1  [["name", "Albury"]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "locations" ("name", "lat", "long", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Albury"], ["lat", -36.07], ["long", 146.95], ["created_at", "2015-05-22 09:53:20.936425"], ["updated_at", "2015-05-22 09:53:20.936425"]]
+  [1m[36m (65.0ms)[0m  [1mcommit transaction[0m
+  [1m[35mLocation Load (0.0ms)[0m  SELECT  "locations".* FROM "locations" WHERE "locations"."name" = ? LIMIT 1  [["name", "Benalla"]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "locations" ("name", "lat", "long", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Benalla"], ["lat", -36.55], ["long", 146.0], ["created_at", "2015-05-22 09:53:21.142437"], ["updated_at", "2015-05-22 09:53:21.142437"]]
+  [1m[36m (77.0ms)[0m  [1mcommit transaction[0m
+  [1m[35mLocation Load (0.0ms)[0m  SELECT  "locations".* FROM "locations" WHERE "locations"."name" = ? LIMIT 1  [["name", "Corryong Airport"]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "locations" ("name", "lat", "long", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Corryong Airport"], ["lat", -36.18], ["long", 147.89], ["created_at", "2015-05-22 09:53:21.355449"], ["updated_at", "2015-05-22 09:53:21.355449"]]
+  [1m[36m (71.0ms)[0m  [1mcommit transaction[0m
+  [1m[35mLocation Load (0.0ms)[0m  SELECT  "locations".* FROM "locations" WHERE "locations"."name" = ? LIMIT 1  [["name", "Edi Upper"]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "locations" ("name", "lat", "long", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Edi Upper"], ["lat", -36.74], ["long", 146.47], ["created_at", "2015-05-22 09:53:21.589463"], ["updated_at", "2015-05-22 09:53:21.589463"]]
+  [1m[36m (73.0ms)[0m  [1mcommit transaction[0m
+  [1m[35mLocation Load (0.0ms)[0m  SELECT  "locations".* FROM "locations" WHERE "locations"."name" = ? LIMIT 1  [["name", "Falls Creek"]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "locations" ("name", "lat", "long", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Falls Creek"], ["lat", -36.87], ["long", 147.28], ["created_at", "2015-05-22 09:53:21.874479"], ["updated_at", "2015-05-22 09:53:21.874479"]]
+  [1m[36m (69.0ms)[0m  [1mcommit transaction[0m
+  [1m[35mLocation Load (0.0ms)[0m  SELECT  "locations".* FROM "locations" WHERE "locations"."name" = ? LIMIT 1  [["name", "Hunters Hill"]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "locations" ("name", "lat", "long", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Hunters Hill"], ["lat", -36.21], ["long", 147.54], ["created_at", "2015-05-22 09:53:22.154495"], ["updated_at", "2015-05-22 09:53:22.154495"]]
+  [1m[36m (74.0ms)[0m  [1mcommit transaction[0m
+  [1m[35mLocation Load (0.0ms)[0m  SELECT  "locations".* FROM "locations" WHERE "locations"."name" = ? LIMIT 1  [["name", "Lake Dartmouth"]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "locations" ("name", "lat", "long", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Lake Dartmouth"], ["lat", -36.54], ["long", 147.5], ["created_at", "2015-05-22 09:53:22.359507"], ["updated_at", "2015-05-22 09:53:22.359507"]]
+  [1m[36m (76.0ms)[0m  [1mcommit transaction[0m
+  [1m[35mLocation Load (0.0ms)[0m  SELECT  "locations".* FROM "locations" WHERE "locations"."name" = ? LIMIT 1  [["name", "Mount Buller"]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "locations" ("name", "lat", "long", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Mount Buller"], ["lat", -37.15], ["long", 146.44], ["created_at", "2015-05-22 09:53:22.652523"], ["updated_at", "2015-05-22 09:53:22.652523"]]
+  [1m[36m (75.0ms)[0m  [1mcommit transaction[0m
+  [1m[35mLocation Load (0.0ms)[0m  SELECT  "locations".* FROM "locations" WHERE "locations"."name" = ? LIMIT 1  [["name", "Mount Hotham Airport"]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (3.0ms)[0m  INSERT INTO "locations" ("name", "lat", "long", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Mount Hotham Airport"], ["lat", -37.05], ["long", 147.33], ["created_at", "2015-05-22 09:53:22.964541"], ["updated_at", "2015-05-22 09:53:22.964541"]]
+  [1m[36m (75.0ms)[0m  [1mcommit transaction[0m
+  [1m[35mLocation Load (0.0ms)[0m  SELECT  "locations".* FROM "locations" WHERE "locations"."name" = ? LIMIT 1  [["name", "Mount Hotham AWS"]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "locations" ("name", "lat", "long", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Mount Hotham AWS"], ["lat", -36.98], ["long", 147.13], ["created_at", "2015-05-22 09:53:23.608578"], ["updated_at", "2015-05-22 09:53:23.608578"]]
+  [1m[36m (78.0ms)[0m  [1mcommit transaction[0m
+  [1m[35mLocation Load (0.0ms)[0m  SELECT  "locations".* FROM "locations" WHERE "locations"."name" = ? LIMIT 1  [["name", "Rutherglen RS"]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "locations" ("name", "lat", "long", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Rutherglen RS"], ["lat", -36.1], ["long", 146.51], ["created_at", "2015-05-22 09:53:23.939597"], ["updated_at", "2015-05-22 09:53:23.939597"]]
+  [1m[36m (70.0ms)[0m  [1mcommit transaction[0m
+  [1m[35mLocation Load (0.0ms)[0m  SELECT  "locations".* FROM "locations" WHERE "locations"."name" = ? LIMIT 1  [["name", "Wangaratta"]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "locations" ("name", "lat", "long", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Wangaratta"], ["lat", -36.42], ["long", 146.31], ["created_at", "2015-05-22 09:53:24.309618"], ["updated_at", "2015-05-22 09:53:24.309618"]]
+  [1m[36m (76.0ms)[0m  [1mcommit transaction[0m
+  [1m[35mLocation Load (0.0ms)[0m  SELECT  "locations".* FROM "locations" WHERE "locations"."name" = ? LIMIT 1  [["name", "Castlemaine"]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "locations" ("name", "lat", "long", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Castlemaine"], ["lat", -37.08], ["long", 144.24], ["created_at", "2015-05-22 09:53:24.519630"], ["updated_at", "2015-05-22 09:53:24.519630"]]
+  [1m[36m (74.0ms)[0m  [1mcommit transaction[0m
+  [1m[35mLocation Load (0.0ms)[0m  SELECT  "locations".* FROM "locations" WHERE "locations"."name" = ? LIMIT 1  [["name", "Eildon Fire Tower"]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "locations" ("name", "lat", "long", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Eildon Fire Tower"], ["lat", -37.21], ["long", 145.84], ["created_at", "2015-05-22 09:53:24.862650"], ["updated_at", "2015-05-22 09:53:24.862650"]]
+  [1m[36m (74.0ms)[0m  [1mcommit transaction[0m
+  [1m[35mLocation Load (0.0ms)[0m  SELECT  "locations".* FROM "locations" WHERE "locations"."name" = ? LIMIT 1  [["name", "Kilmore Gap"]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "locations" ("name", "lat", "long", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Kilmore Gap"], ["lat", -37.38], ["long", 144.97], ["created_at", "2015-05-22 09:53:25.203669"], ["updated_at", "2015-05-22 09:53:25.203669"]]
+  [1m[36m (72.0ms)[0m  [1mcommit transaction[0m
+  [1m[35mLocation Load (0.0ms)[0m  SELECT  "locations".* FROM "locations" WHERE "locations"."name" = ? LIMIT 1  [["name", "Lake Eildon"]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "locations" ("name", "lat", "long", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Lake Eildon"], ["lat", -37.23], ["long", 145.91], ["created_at", "2015-05-22 09:53:25.441683"], ["updated_at", "2015-05-22 09:53:25.441683"]]
+  [1m[36m (78.0ms)[0m  [1mcommit transaction[0m
+  [1m[35mLocation Load (0.0ms)[0m  SELECT  "locations".* FROM "locations" WHERE "locations"."name" = ? LIMIT 1  [["name", "Maryborough"]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "locations" ("name", "lat", "long", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Maryborough"], ["lat", -37.06], ["long", 143.73], ["created_at", "2015-05-22 09:53:25.679697"], ["updated_at", "2015-05-22 09:53:25.679697"]]
+  [1m[36m (71.0ms)[0m  [1mcommit transaction[0m
+  [1m[35mLocation Load (0.0ms)[0m  SELECT  "locations".* FROM "locations" WHERE "locations"."name" = ? LIMIT 1  [["name", "East Sale"]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "locations" ("name", "lat", "long", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "East Sale"], ["lat", -38.12], ["long", 147.13], ["created_at", "2015-05-22 09:53:26.006715"], ["updated_at", "2015-05-22 09:53:26.006715"]]
+  [1m[36m (72.0ms)[0m  [1mcommit transaction[0m
+  [1m[35mLocation Load (1.0ms)[0m  SELECT  "locations".* FROM "locations" WHERE "locations"."name" = ? LIMIT 1  [["name", "Hogan Island"]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "locations" ("name", "lat", "long", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Hogan Island"], ["lat", -39.22], ["long", 146.98], ["created_at", "2015-05-22 09:53:26.331734"], ["updated_at", "2015-05-22 09:53:26.331734"]]
+  [1m[36m (70.0ms)[0m  [1mcommit transaction[0m
+  [1m[35mLocation Load (0.0ms)[0m  SELECT  "locations".* FROM "locations" WHERE "locations"."name" = ? LIMIT 1  [["name", "Latrobe Valley"]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "locations" ("name", "lat", "long", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Latrobe Valley"], ["lat", -38.21], ["long", 146.47], ["created_at", "2015-05-22 09:53:26.647752"], ["updated_at", "2015-05-22 09:53:26.647752"]]
+  [1m[36m (71.0ms)[0m  [1mcommit transaction[0m
+  [1m[35mLocation Load (0.0ms)[0m  SELECT  "locations".* FROM "locations" WHERE "locations"."name" = ? LIMIT 1  [["name", "Mount Baw Baw"]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "locations" ("name", "lat", "long", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Mount Baw Baw"], ["lat", -37.84], ["long", 146.27], ["created_at", "2015-05-22 09:53:27.242786"], ["updated_at", "2015-05-22 09:53:27.242786"]]
+  [1m[36m (78.0ms)[0m  [1mcommit transaction[0m
+  [1m[35mLocation Load (0.0ms)[0m  SELECT  "locations".* FROM "locations" WHERE "locations"."name" = ? LIMIT 1  [["name", "Mount Moornapa"]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "locations" ("name", "lat", "long", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Mount Moornapa"], ["lat", -37.75], ["long", 147.14], ["created_at", "2015-05-22 09:53:27.759815"], ["updated_at", "2015-05-22 09:53:27.759815"]]
+  [1m[36m (75.0ms)[0m  [1mcommit transaction[0m
+  [1m[35mLocation Load (0.0ms)[0m  SELECT  "locations".* FROM "locations" WHERE "locations"."name" = ? LIMIT 1  [["name", "Warragul (Nilma North)"]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "locations" ("name", "lat", "long", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Warragul (Nilma North)"], ["lat", -38.13], ["long", 145.99], ["created_at", "2015-05-22 09:53:28.140837"], ["updated_at", "2015-05-22 09:53:28.140837"]]
+  [1m[36m (79.0ms)[0m  [1mcommit transaction[0m
+  [1m[35mLocation Load (1.0ms)[0m  SELECT  "locations".* FROM "locations" WHERE "locations"."name" = ? LIMIT 1  [["name", "Willow Grove"]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "locations" ("name", "lat", "long", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Willow Grove"], ["lat", -38.08], ["long", 146.21], ["created_at", "2015-05-22 09:53:28.353849"], ["updated_at", "2015-05-22 09:53:28.353849"]]
+  [1m[36m (72.0ms)[0m  [1mcommit transaction[0m
+  [1m[35mLocation Load (1.0ms)[0m  SELECT  "locations".* FROM "locations" WHERE "locations"."name" = ? LIMIT 1  [["name", "Wilsons Promontory"]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "locations" ("name", "lat", "long", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Wilsons Promontory"], ["lat", -39.13], ["long", 146.42], ["created_at", "2015-05-22 09:53:28.848878"], ["updated_at", "2015-05-22 09:53:28.848878"]]
+  [1m[36m (70.0ms)[0m  [1mcommit transaction[0m
+  [1m[35mLocation Load (0.0ms)[0m  SELECT  "locations".* FROM "locations" WHERE "locations"."name" = ? LIMIT 1  [["name", "Yanakie"]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "locations" ("name", "lat", "long", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Yanakie"], ["lat", -38.81], ["long", 146.19], ["created_at", "2015-05-22 09:53:29.481914"], ["updated_at", "2015-05-22 09:53:29.481914"]]
+  [1m[36m (80.0ms)[0m  [1mcommit transaction[0m
+  [1m[35mLocation Load (0.0ms)[0m  SELECT  "locations".* FROM "locations" WHERE "locations"."name" = ? LIMIT 1  [["name", "Yarram Airport"]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "locations" ("name", "lat", "long", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Yarram Airport"], ["lat", -38.56], ["long", 146.75], ["created_at", "2015-05-22 09:53:29.800932"], ["updated_at", "2015-05-22 09:53:29.800932"]]
+  [1m[36m (76.0ms)[0m  [1mcommit transaction[0m
+  [1m[35mLocation Load (0.0ms)[0m  SELECT  "locations".* FROM "locations" WHERE "locations"."name" = ? LIMIT 1  [["name", "Bairnsdale"]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "locations" ("name", "lat", "long", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Bairnsdale"], ["lat", -37.88], ["long", 147.57], ["created_at", "2015-05-22 09:53:30.099949"], ["updated_at", "2015-05-22 09:53:30.099949"]]
+  [1m[36m (78.0ms)[0m  [1mcommit transaction[0m
+  [1m[35mLocation Load (0.0ms)[0m  SELECT  "locations".* FROM "locations" WHERE "locations"."name" = ? LIMIT 1  [["name", "Combienbar"]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "locations" ("name", "lat", "long", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Combienbar"], ["lat", -37.34], ["long", 149.02], ["created_at", "2015-05-22 09:53:30.409967"], ["updated_at", "2015-05-22 09:53:30.409967"]]
+  [1m[36m (82.0ms)[0m  [1mcommit transaction[0m
+  [1m[35mLocation Load (0.0ms)[0m  SELECT  "locations".* FROM "locations" WHERE "locations"."name" = ? LIMIT 1  [["name", "Gabo Island"]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "locations" ("name", "lat", "long", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Gabo Island"], ["lat", -37.57], ["long", 149.92], ["created_at", "2015-05-22 09:53:30.715985"], ["updated_at", "2015-05-22 09:53:30.715985"]]
+  [1m[36m (96.0ms)[0m  [1mcommit transaction[0m
+  [1m[35mLocation Load (0.0ms)[0m  SELECT  "locations".* FROM "locations" WHERE "locations"."name" = ? LIMIT 1  [["name", "Gelantipy"]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "locations" ("name", "lat", "long", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Gelantipy"], ["lat", -37.22], ["long", 148.26], ["created_at", "2015-05-22 09:53:31.257016"], ["updated_at", "2015-05-22 09:53:31.257016"]]
+  [1m[36m (78.0ms)[0m  [1mcommit transaction[0m
+  [1m[35mLocation Load (0.0ms)[0m  SELECT  "locations".* FROM "locations" WHERE "locations"."name" = ? LIMIT 1  [["name", "Kingfish B"]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "locations" ("name", "lat", "long", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Kingfish B"], ["lat", -38.6], ["long", 148.19], ["created_at", "2015-05-22 09:53:32.749101"], ["updated_at", "2015-05-22 09:53:32.749101"]]
+  [1m[36m (86.0ms)[0m  [1mcommit transaction[0m
+  [1m[35mLocation Load (0.0ms)[0m  SELECT  "locations".* FROM "locations" WHERE "locations"."name" = ? LIMIT 1  [["name", "Lakes Entrance"]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "locations" ("name", "lat", "long", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Lakes Entrance"], ["lat", -37.87], ["long", 148.01], ["created_at", "2015-05-22 09:53:33.015116"], ["updated_at", "2015-05-22 09:53:33.015116"]]
+  [1m[36m (95.0ms)[0m  [1mcommit transaction[0m
+  [1m[35mLocation Load (0.0ms)[0m  SELECT  "locations".* FROM "locations" WHERE "locations"."name" = ? LIMIT 1  [["name", "Mallacoota"]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "locations" ("name", "lat", "long", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Mallacoota"], ["lat", -37.6], ["long", 149.73], ["created_at", "2015-05-22 09:53:33.346135"], ["updated_at", "2015-05-22 09:53:33.346135"]]
+  [1m[36m (88.0ms)[0m  [1mcommit transaction[0m
+  [1m[35mLocation Load (0.0ms)[0m  SELECT  "locations".* FROM "locations" WHERE "locations"."name" = ? LIMIT 1  [["name", "Mount Nowa Nowa"]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "locations" ("name", "lat", "long", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Mount Nowa Nowa"], ["lat", -37.69], ["long", 148.09], ["created_at", "2015-05-22 09:53:33.655153"], ["updated_at", "2015-05-22 09:53:33.655153"]]
+  [1m[36m (72.0ms)[0m  [1mcommit transaction[0m
+  [1m[35mLocation Load (0.0ms)[0m  SELECT  "locations".* FROM "locations" WHERE "locations"."name" = ? LIMIT 1  [["name", "Omeo"]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "locations" ("name", "lat", "long", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Omeo"], ["lat", -37.1], ["long", 147.6], ["created_at", "2015-05-22 09:53:33.976171"], ["updated_at", "2015-05-22 09:53:33.976171"]]
+  [1m[36m (109.0ms)[0m  [1mcommit transaction[0m
+  [1m[35mLocation Load (0.0ms)[0m  SELECT  "locations".* FROM "locations" WHERE "locations"."name" = ? LIMIT 1  [["name", "Orbost"]]
+  [1m[36m (1.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "locations" ("name", "lat", "long", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Orbost"], ["lat", -37.69], ["long", 148.47], ["created_at", "2015-05-22 09:53:34.308190"], ["updated_at", "2015-05-22 09:53:34.308190"]]
+  [1m[36m (88.0ms)[0m  [1mcommit transaction[0m
+  [1m[35mLocation Load (0.0ms)[0m  SELECT  "locations".* FROM "locations" WHERE "locations"."name" = ? LIMIT 1  [["name", "Point Hicks"]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "locations" ("name", "lat", "long", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Point Hicks"], ["lat", -37.8], ["long", 149.27], ["created_at", "2015-05-22 09:53:34.748215"], ["updated_at", "2015-05-22 09:53:34.748215"]]
+  [1m[36m (86.0ms)[0m  [1mcommit transaction[0m
+  [1m[35mLocation Load (0.0ms)[0m  SELECT  "locations".* FROM "locations" WHERE "locations"."name" = ? LIMIT 1  [["name", "Victoria Point"]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "locations" ("name", "lat", "long", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Victoria Point"], ["lat", -37.45], ["long", 142.19], ["created_at", "2015-05-22 09:53:35.161239"], ["updated_at", "2015-05-22 09:53:35.161239"]]
+  [1m[36m (92.0ms)[0m  [1mcommit transaction[0m
+  [1m[35mLocation Load (1.0ms)[0m  SELECT  "locations".* FROM "locations" WHERE "locations"."name" = ? LIMIT 1  [["name", "Barwon Downs"]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "locations" ("name", "lat", "long", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Barwon Downs"], ["lat", -38.46], ["long", 143.76], ["created_at", "2015-05-22 09:53:35.550261"], ["updated_at", "2015-05-22 09:53:35.550261"]]
+  [1m[36m (92.0ms)[0m  [1mcommit transaction[0m
+  [1m[36mLocation Load (3.0ms)[0m  [1mSELECT "locations".* FROM "locations"[0m
