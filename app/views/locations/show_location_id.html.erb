@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<h1><center>Listing Location Data</center></h1>
+
+<table border="1" cellspacing="0" style="width:100%">
+  <thead>
+    <tr>
+      <th>Time</th>
+      <th>Temp</th>
+      <th>Precip Intensity</th>
+      <th>Wind Direction</th>
+      <th>Wind Speed</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @hash[:measurements].each do |measurement| %>
+      <tr>
+        <td><center><%= measurement[:time] %></center></td>
+        <td><center><%= measurement[:temp] %></center></td>
+        <td><center><%= measurement[:precip] %></center></td>
+        <td><center><%= measurement[:wind_direction] %></center></td>
+        <td><center><%= measurement[:wind_speed] %></center></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

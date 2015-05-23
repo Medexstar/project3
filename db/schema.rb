@@ -15,11 +15,14 @@ ActiveRecord::Schema.define(version: 20150521061611) do
 
   create_table "locations", force: :cascade do |t|
     t.string   "name"
+    t.string   "location_id"
     t.float    "lat"
     t.float    "long"
     t.integer  "postcode"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "last_update"
+    t.string   "summary"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "measurements", force: :cascade do |t|

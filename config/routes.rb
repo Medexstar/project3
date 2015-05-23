@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
   resources :measurements
   resources :locations
+  
+  get 'weather/locations' => 'locations#index'
+  
+  get 'weather/data/:location_id/:date' => 'locations#show_location_id'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
