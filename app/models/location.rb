@@ -30,6 +30,6 @@ class Location < ActiveRecord::Base
 	end
 	
 	def to_json
-		{:id => self.location_id.to_s, :lat => self.lat.to_s, :long => self.long.to_s, :last_updated => self.last_update.to_s}
+		{:id => self.location_id.to_s, :lat => self.lat.to_s, :long => self.long.to_s, :last_updated => self.last_update ? self.last_update.strftime("%l:%M%P %d-%m-%Y") : self.last_update}
 	end
 end
