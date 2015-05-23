@@ -4,7 +4,8 @@ Rails.application.routes.draw do
   
   get 'weather/locations' => 'locations#index'
   
-  get 'weather/data/:location_id/:date' => 'locations#show_location_id'
+  get 'weather/data/:location_id/:date' => 'locations#show_location_id', constraints: {location_id: /[A-Z\s]*/}
+  get 'weather/data/:post_code/:date' => 'locations#show_postcode', constraints: {post_code: /\d+/}
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
