@@ -1,11 +1,10 @@
 Rails.application.routes.draw do
-  resources :measurements
-  resources :locations
   
   get 'weather/locations' => 'locations#index'
   
-  get 'weather/data/:location_id/:date' => 'locations#show_location_id', constraints: {location_id: /[A-Z\s]*/}
-  get 'weather/data/:post_code/:date' => 'locations#show_postcode', constraints: {post_code: /\d+/}
+  get 'weather/data/:location_id/:date' => 'measurements#show_location_id', constraints: {location_id: /[A-Z\s_]*/}
+  get 'weather/data/:post_code/:date' => 'measurements#show_postcode', constraints: {post_code: /\d+/}
+  get 'weather/prediction/:lat/:long/:period' => 'prediction#show_lat_long', constraints: {lat: /-?\d+.\d*/, long: /-?\d+.\d*/, period: /\d+/}
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

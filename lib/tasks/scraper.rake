@@ -31,6 +31,7 @@ namespace :scrape do
 			long = $2.to_f
 			location_doc.css("table.stationdetails td")[2].text.match(/Name: ([A-Z\s]*)/)
 			id = $1.strip
+			id.tr!(' ','_')
 			googlemaps = JSON.parse(open("#{url}#{lat},#{long}&#{api}").read)
 			postcode = googlemaps["results"][0]["address_components"][-1]["long_name"]
 			# Update the location in the DB.

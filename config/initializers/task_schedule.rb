@@ -12,7 +12,7 @@ if defined?(Rails::Server)
 
 	# scheduler = Rufus::Scheduler.new
 
-	# scheduler.every("30m") do
+	# scheduler.every("142m") do
 	# 	Thread.new {forecast.invoke}
 	# end
 end

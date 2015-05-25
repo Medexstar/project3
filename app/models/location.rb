@@ -35,12 +35,12 @@ class Location < ActiveRecord::Base
 		return hash
 	end
 	
-	def to_json
-		{:id => self.location_id.to_s, :lat => self.lat.to_s, :lon => self.long.to_s, :last_update => self.last_update ? self.last_update.strftime("%-l:%M%P %d-%m-%Y") : self.last_update}
-	end
-	
-	def to_json measurements
-		{:id => self.location_id.to_s, :lat => self.lat.to_s, :lon => self.long.to_s, :last_update => self.last_update ? self.last_update.strftime("%-l:%M%P %d-%m-%Y") : self.last_update, :measurements => measurements}
+	def to_json *args
+		if args.length == 0
+			{:id => self.location_id.to_s, :lat => self.lat.to_s, :lon => self.long.to_s, :last_update => self.last_update ? self.last_update.strftime("%-l:%M%P %d-%m-%Y") : self.last_update}
+		elsif args.length == 1
+			{:id => self.location_id.to_s, :lat => self.lat.to_s, :lon => self.long.to_s, :last_update => self.last_update ? self.last_update.strftime("%-l:%M%P %d-%m-%Y") : self.last_update, :measurements => args[0]}
+		end
 	end
 	
 	def get_measurements date
@@ -51,5 +51,38 @@ class Location < ActiveRecord::Base
 			end
 		end
 		return measurements
+	end
+	
+	def self.get_nearest_location lat, long
+		loc1 = [lat.to_f, long.to_f]
+		locations = Location.all
+		min_distance = Float::INFINITY
+		nearest_location = nil
+		locations.each do |location|
+			loc2 = [location.lat, location.long]
+			distance = haversine_distance(loc1, loc2)
+			if distance < min_distance
+				min_distance = distance
+				nearest_location = location
+			end
+		end
+		return nearest_location
+	end
+	
+	def self.haversine_distance loc1, loc2
+	  rad_per_deg = Math::PI/180  # PI / 180
+	  rkm = 6371                  # Earth radius in kilometers
+	  rm = rkm * 1000             # Radius in meters
+
+	  dlat_rad = (loc2[0]-loc1[0]) * rad_per_deg  # Delta, converted to rad
+	  dlon_rad = (loc2[1]-loc1[1]) * rad_per_deg
+
+	  lat1_rad = loc1[0] * rad_per_deg
+	  lat2_rad = loc2[0] * rad_per_deg
+
+	  a = Math.sin(dlat_rad/2)**2 + Math.cos(lat1_rad) * Math.cos(lat2_rad) * Math.sin(dlon_rad/2)**2
+	  c = 2 * Math::atan2(Math::sqrt(a), Math::sqrt(1-a))
+
+	  rm * c # Delta in meters
 	end
 end
