@@ -31,11 +31,10 @@ class PolyRegression < Regression
         #Perform regression on all polynomial orders
         (1..10).each do |degree|
             poly_reg(degree)
-            @coefficients = @coefficients.map {|i| i.round(2)}
+            @coefficients = @coefficients.map {|i| i}
             r2_values << calc_rsquared(degree)
         end
         #Choose best fit polynomial equation based on R^2 value
-        puts r2_values
         degree = r2_values.index(r2_values.max) + 1
         @r_sqrd = r2_values.max
         poly_reg(degree)

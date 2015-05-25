@@ -24,7 +24,7 @@ class Prediction < ActiveRecord::Base
 			hash[:predictions][(time*10).to_s] = {:time => (current_time + (time*10*60)).strftime("%-l:%M%P %d-%m-%Y")}
 			[rainfall_array, temp_array, winddir_array, windspeed_array].each do |y_array|
 				reg = Regression.calc_best_regression(time_array, y_array)
-				value = reg.coefficients
+				value = reg.calc_prediction(time_difference/60 + time*10).round(2)
 				hash[:predictions][(time*10).to_s][names[count]] = {:value => value.to_s, :probability => reg.r_sqrd.to_s}
 				count += 1
 			end

@@ -19,7 +19,7 @@
         <td><center><%= prediction[:time] %></center></td>
         <td><center><%= prediction[:temp][:value] %></center></td>
         <td><center><%= prediction[:rain][:value] %></center></td>
-        <td><center><%= prediction[:wind_direction][:value] %></center></td>
+        <td><center><%= (prediction[:wind_direction][:value].to_f % 360).round(2) %></center></td>
         <td><center><%= prediction[:wind_speed][:value] %></center></td>
       </tr>
     <% end %>
