@@ -1,24 +1,22 @@
-<p id="notice"><%= notice %></p>
+<h1 class="text-center">Listing All Locations</h1>
 
-<h1><center>Listing Locations</center></h1>
-
-<table border="1" cellspacing="0" style="width:100%">
+<table class="table table-hover">
   <thead>
     <tr>
-      <th>ID</th>
-      <th>Lat</th>
-      <th>Long</th>
-      <th>Last Updated</th>
+      <th class="text-center">ID</th>
+      <th class="text-center">Lat</th>
+      <th class="text-center">Long</th>
+      <th class="text-center">Last Updated</th>
     </tr>
   </thead>
 
   <tbody>
     <% @hash[:locations].each do |location| %>
       <tr>
-        <td><center><%= location[:id] %></center></td>
-        <td><center><%= location[:lat] %></center></td>
-        <td><center><%= location[:lon] %></center></td>
-        <td><center><%= location[:last_update] %></center></td>
+        <td class="text-center"><%= location[:id] %></td>
+        <td class="text-center"><%= location[:lat] %></td>
+        <td class="text-center"><%= location[:lon] %></td>
+        <td class="text-center"><%= location[:last_update] %></td>
       </tr>
     <% end %>
   </tbody>

@@ -1,27 +1,25 @@
-<p id="notice"><%= notice %></p>
-
-<h1><center>Listing Location Data</center></h1>
+<h1 class="text-center">Listing Location Data for <%= params[:post_code] %></h1>
 <% @hash[:locations].each do |location| %>
-  <h3><center><%= location[:id] %></center></h3>
-  <table border="1" cellspacing="0" style="width:100%">
+  <h3 class="text-center"><%= location[:id] %></h3>
+  <table class="table table-hover">
     <thead>
       <tr>
-        <th>Time</th>
-        <th>Temp</th>
-        <th>Precip Intensity</th>
-        <th>Wind Direction</th>
-        <th>Wind Speed</th>
+        <th class="text-center">Time</th>
+        <th class="text-center">Temp</th>
+        <th class="text-center">Precip Intensity</th>
+        <th class="text-center">Wind Direction</th>
+        <th class="text-center">Wind Speed</th>
       </tr>
     </thead>
     
     <tbody>
       <% location[:measurements].each do |measurement| %>
         <tr>
-          <td><center><%= measurement[:time] %></center></td>
-          <td><center><%= measurement[:temp] %></center></td>
-          <td><center><%= measurement[:precip] %></center></td>
-          <td><center><%= measurement[:wind_direction] %></center></td>
-          <td><center><%= measurement[:wind_speed] %></center></td>
+          <td class="text-center"><%= measurement[:time] %></td>
+          <td class="text-center"><%= measurement[:temp] %></td>
+          <td class="text-center"><%= measurement[:precip] %></td>
+          <td class="text-center"><%= measurement[:wind_direction] %></td>
+          <td class="text-center"><%= measurement[:wind_speed] %></td>
         </tr>
       <% end %>
     </tbody>

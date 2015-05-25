@@ -1,26 +1,31 @@
-<p id="notice"><%= notice %></p>
-
-<h1><center>Predicting Location Data</center></h1>
-<table border="1" cellspacing="0" style="width:100%">
+<h1 class="text-center">Predicting Location Data for <%= @hash[:lattitude] %>, <%= @hash[:longitude] %></h1>
+<table class="table table-hover">
   <thead>
     <tr>
-      <th>Time</th>
-      <th>Temp</th>
-      <th>Precip Intensity</th>
-      <th>Wind Direction</th>
-      <th>Wind Speed</th>
+      <th class="text-center">Time</th>
+      <th class="text-center">Temp</th>
+      <th class="text-center">Precip Intensity</th>
+      <th class="text-center">Wind Direction</th>
+      <th class="text-center">Wind Speed</th>
     </tr>
   </thead>
 
   <tbody>
     <% @hash[:predictions].each do |time, prediction| %>
       <tr>
-        <td><center><%= prediction[:time] %></center></td>
-        <td><center><%= prediction[:temp][:value] %></center></td>
-        <td><center><%= prediction[:rain][:value] %></center></td>
-        <td><center><%= (prediction[:wind_direction][:value].to_f % 360).round(2) %></center></td>
-        <td><center><%= prediction[:wind_speed][:value] %></center></td>
+        <td class="text-center"><%= prediction[:time] %></td>
+        <td class="text-center"><%= prediction[:temp][:value] %></td>
+        <td class="text-center"><%= prediction[:rain][:value] %></td>
+        <td class="text-center"><%= (prediction[:wind_direction][:value].to_f % 360).round(2) %></td>
+        <td class="text-center"><%= prediction[:wind_speed][:value] %></td>
       </tr>
     <% end %>
+    <tr>
+      <th class="text-center">Probability</th>
+      <td class="text-center"><%= @hash[:predictions]["0"][:temp][:probability].to_f.round(4) %></td>
+      <td class="text-center"><%= @hash[:predictions]["0"][:rain][:probability].to_f.round(4) %></td>
+      <td class="text-center"><%= @hash[:predictions]["0"][:wind_direction][:probability].to_f.round(4) %></td>
+      <td class="text-center"><%= @hash[:predictions]["0"][:wind_speed][:probability].to_f.round(4) %></td>
+      </tr>
   </tbody>
 </table>
