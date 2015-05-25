@@ -8,4 +8,7 @@ class PredictionController < ApplicationController
 	      format.json { render json: JSON.pretty_generate(@hash) }
 	    end
 	end
+	
+	def show_postcode
+	end
 end
