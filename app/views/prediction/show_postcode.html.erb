@@ -1,0 +1,26 @@
+<p id="notice"><%= notice %></p>
+
+<h1><center>Listing Postcode Data</center></h1>
+<table border="1" cellspacing="0" style="width:100%">
+  <thead>
+    <tr>
+      <th>Time</th>
+      <th>Temp</th>
+      <th>Precip Intensity</th>
+      <th>Wind Direction</th>
+      <th>Wind Speed</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @hash[:predictions].each do |time, prediction| %>
+      <tr>
+        <td><center><%= prediction[:time] %></center></td>
+        <td><center><%= prediction[:temp][:value] %></center></td>
+        <td><center><%= prediction[:rain][:value] %></center></td>
+        <td><center><%= (prediction[:wind_direction][:value].to_f % 360).round(2) %></center></td>
+        <td><center><%= prediction[:wind_speed][:value] %></center></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

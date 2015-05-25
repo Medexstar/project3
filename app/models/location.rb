@@ -72,14 +72,17 @@ class Location < ActiveRecord::Base
 					nearest_location = location
 				end
 			end
-			return nearest_location
+			return [nearest_location]
 		elsif args.length == 1
 			url = 'https://maps.googleapis.com/maps/api/geocode/json?'
 			api = 'key=AIzaSyC_ah2e2ctcBDwIYBZ1O8laWOpguNeBx5I'
 			postcode = args[0]
 			components = "components=postal_code:#{postcode}|country:AU"
 			
-			googlemaps = JSON.parse(open("#{url}#{components}&#{api}").read)
+			googlemaps = JSON.parse(open(URI.encode("#{url}#{components}&#{api}")).read)
+			lat = googlemaps["results"][0]["geometry"]["location"]["lat"]
+			long = googlemaps["results"][0]["geometry"]["location"]["lng"]
+			return get_nearest_location(lat, long)
 		end
 	end
 	
