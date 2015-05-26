@@ -5,15 +5,15 @@ require 'rake'
 if defined?(Rails::Server)
 	Project3::Application.load_tasks
 	seed = Rake::Task["scrape:seed_locations"]
-	forecast = Rake::Task["scrape:forecast"]
+	bom = Rake::Task["scrape:bom"]
 	seed.invoke
-	Thread.new {forecast.invoke}
+	Thread.new {bom.invoke}
 	
 
 	scheduler = Rufus::Scheduler.new
 
 	scheduler.every("5m") do
-		forecast.reenable
-		Thread.new {forecast.invoke}
+		bom.reenable
+		Thread.new {bom.invoke}
 	end
 end

@@ -13,7 +13,7 @@ class Postcode < ActiveRecord::Base
 	end
 
 	def get_locations
-		if self.locations.size != 0
+		if !self.locations.empty?
 			return self.locations.all
 		else
 			return Location.get_nearest_location(self.lat, self.long)

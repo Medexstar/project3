@@ -14,6 +14,7 @@ namespace :scrape do
 		api = 'key=AIzaSyC_ah2e2ctcBDwIYBZ1O8laWOpguNeBx5I'
 		
 		# Get the list of locations from BOM.
+		puts "Seeding locations from BOM"
 		location_nodes = doc.css("th[id*=-station-]").map
 		location_nodes.each do |location_node|
 			html_id = location_node["id"]
@@ -22,11 +23,12 @@ namespace :scrape do
 			station_details = location_doc.css("table[class=stationdetails]").first.text
 			station_details.match(/Lat:\s*(-?\d+\.\d+)\s+Lon:\s*(-?\d+\.\d+)/)
 			name = location_node.text
-			
 			#Remove observation stations with unobtainable postcodes
 			if name == "Kingfish B" || name == "Hogan Island" || name == "Mount Hotham AWS"
 				next
 			end
+			
+			puts "Seeding Station: #{name}"
 			
 			lat = $1.to_f
 			long = $2.to_f
@@ -56,8 +58,38 @@ namespace :scrape do
 		end
 	end
 	
-	task :forecast => :environment do
-
+	task :bom => :environment do
+		puts "Scraping data from BOM site"
+		doc = Nokogiri::HTML(open("#{BOM_BASE_URL}/vic/observations/vicall.shtml"))
+		Location.all.each do |location|
+			id = location.html_id
+			puts "Scraping Station: #{location.name}"
+			data = doc.css("td[headers~=#{id}]")
+		 
+			if (data.empty?)
+				next
+			else
+			 	new_temp = data[1].text
+			 	new_rainfall = data[12].text
+			 	new_wind_speed = data[7].text
+			 	new_wind_direction = data[6].text
+			 	new_time = data[0].text
+			end
+			
+			measurement = Measurement.new(
+				temp: new_temp,
+				precip_intensity: new_rainfall,
+				wind_speed: new_wind_speed,
+				wind_direction: new_wind_direction,
+				timestamp: new_time
+			)
+			measurement.location = location
+			location.last_update = measurement.timestamp
+			location.summary = "Shitty"
+			location.save
+			measurement.save
+			
+		end
 	end
 
 	#Scrape data from forecast into DB
