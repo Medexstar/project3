@@ -19,7 +19,7 @@ class Prediction < ActiveRecord::Base
 			locations = postcode.get_locations
 		else
 			postcode = Postcode.new_postcode(code)
-			locations = postcode.get_location
+			locations = postcode.get_locations
 		end
 		data_hash = {}
 		result_hash = {:postcode => code, :predictions => {}}
@@ -47,8 +47,8 @@ class Prediction < ActiveRecord::Base
 	def self.make_prediction data_hash, period, hash, first_measurement
 		current_time = Time.now
 		time_difference = current_time - first_measurement
-		names = [:rain, :temp, :wind_direction, :wind_speed]
-		rainfall_array, temp_array, winddir_array, windspeed_array, time_array = [], [] ,[] ,[] ,[]
+		names = [:rain, :temp, :wind_speed]
+		rainfall_array, temp_array, winddir_array, windspeed_array, time_array = [], [] ,[] ,[], []
 		
 		data_hash.each do |time, measurements|
 			time_array << time

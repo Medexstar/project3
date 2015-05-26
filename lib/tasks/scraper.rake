@@ -17,12 +17,16 @@ namespace :scrape do
 		puts "Seeding locations from BOM"
 		location_nodes = doc.css("th[id*=-station-]").map
 		location_nodes.each do |location_node|
+			name = location_node.text
+			if Location.find_by(name: name)
+				next
+			end
 			html_id = location_node["id"]
 			# Find the location's information
 			location_doc = Nokogiri.HTML(open("#{BOM_BASE_URL}#{location_node.css("a")[0]["href"]}"))
 			station_details = location_doc.css("table[class=stationdetails]").first.text
 			station_details.match(/Lat:\s*(-?\d+\.\d+)\s+Lon:\s*(-?\d+\.\d+)/)
-			name = location_node.text
+			
 			#Remove observation stations with unobtainable postcodes
 			if name == "Kingfish B" || name == "Hogan Island" || name == "Mount Hotham AWS"
 				next
@@ -67,6 +71,7 @@ namespace :scrape do
 			data = doc.css("td[headers~=#{id}]")
 		 
 			if (data.empty?)
+				puts "test"
 				next
 			else
 			 	new_temp = data[1].text
@@ -80,16 +85,22 @@ namespace :scrape do
 				temp: new_temp,
 				precip_intensity: new_rainfall,
 				wind_speed: new_wind_speed,
-				wind_direction: new_wind_direction,
+				wind_direction: cardinal_direction_degrees(new_wind_direction),
 				timestamp: new_time
 			)
 			measurement.location = location
 			location.last_update = measurement.timestamp
 			location.summary = "Shitty"
-			location.save
-			measurement.save
-			
+			if !location.measurements.exists?(:timestamp => measurement.timestamp)
+				measurement.save
+				location.save
+			end
 		end
+	end
+	
+	def cardinal_direction_degrees cardinal
+	 	hash = {n: 0, nne: 22.5, ne: 45, ene: 67.5, e: 90, ese: 112.5, se: 135, sse: 157.5, s: 180, ssw: 202.5, sw: 225, wsw: 247.5, w: 270, wnw: 292.5, nw: 315, nnw: 337.5}
+	 	hash[cardinal.to_s.downcase.to_sym]
 	end
 
 	#Scrape data from forecast into DB

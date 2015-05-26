@@ -4,7 +4,6 @@ require 'json'
 class Location < ActiveRecord::Base
 	has_many :measurements
 	belongs_to :postcode
-	# self.primary_key = :id
 	
 	def self.get_all_locations
 		hash = {:date => Date.today.strftime("%d-%m-%Y"), :locations => []}
@@ -29,8 +28,9 @@ class Location < ActiveRecord::Base
 		return hash
 	end
 	
-	def self.postcode_data postcode, date
+	def self.postcode_data code, date
 		hash = {:date => date, :locations => []}
+		postcode = Postcode.where(code: code)
 		locations = Location.where(postcode: postcode)
 		locations.each do |location|
 			measurements = location.get_measurements(date)

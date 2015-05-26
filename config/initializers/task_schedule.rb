@@ -12,7 +12,7 @@ if defined?(Rails::Server)
 
 	scheduler = Rufus::Scheduler.new
 
-	scheduler.every("5m") do
+	scheduler.every("30m") do
 		bom.reenable
 		Thread.new {bom.invoke}
 	end

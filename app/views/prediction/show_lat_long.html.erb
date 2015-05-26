@@ -16,7 +16,7 @@
         <td class="text-center"><%= prediction[:time] %></td>
         <td class="text-center"><%= prediction[:temp][:value] %></td>
         <td class="text-center"><%= prediction[:rain][:value] %></td>
-        <td class="text-center"><%= (prediction[:wind_direction][:value].to_f % 360).round(2) %></td>
+        <td class="text-center"><%= prediction[:wind_direction][:value] %></td>
         <td class="text-center"><%= prediction[:wind_speed][:value] %></td>
       </tr>
     <% end %>
