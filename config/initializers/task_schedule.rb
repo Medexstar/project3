@@ -3,17 +3,17 @@ require 'rufus/scheduler'
 require 'rake'
 
 if defined?(Rails::Server)
-	# Project3::Application.load_tasks
-	# seed = Rake::Task["scrape:seed_locations"]
-	# forecast = Rake::Task["scrape:forecast"]
-	# seed.invoke
-	# Thread.new {forecast.invoke}
+	Project3::Application.load_tasks
+	seed = Rake::Task["scrape:seed_locations"]
+	forecast = Rake::Task["scrape:forecast"]
+	seed.invoke
+	Thread.new {forecast.invoke}
 	
 
-	# scheduler = Rufus::Scheduler.new
+	scheduler = Rufus::Scheduler.new
 
-	# scheduler.every("5m") do
-	# 	forecast.reenable
-	# 	Thread.new {forecast.invoke}
-	# end
+	scheduler.every("5m") do
+		forecast.reenable
+		Thread.new {forecast.invoke}
+	end
 end

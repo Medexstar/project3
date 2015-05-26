@@ -10,12 +10,13 @@ namespace :scrape do
 	# Update the locations in the DB from BOM. Marks any locations that have disappeared as inactive.
 	task :seed_locations => :environment do
 		doc = Nokogiri::HTML(open("#{BOM_BASE_URL}/vic/observations/vicall.shtml"))
-		url = 'https://maps.googleapis.com/maps/api/geocode/json?latlng='
+		url = 'https://maps.googleapis.com/maps/api/geocode/json?'
 		api = 'key=AIzaSyC_ah2e2ctcBDwIYBZ1O8laWOpguNeBx5I'
 		
 		# Get the list of locations from BOM.
 		location_nodes = doc.css("th[id*=-station-]").map
 		location_nodes.each do |location_node|
+			html_id = location_node["id"]
 			# Find the location's information
 			location_doc = Nokogiri.HTML(open("#{BOM_BASE_URL}#{location_node.css("a")[0]["href"]}"))
 			station_details = location_doc.css("table[class=stationdetails]").first.text
@@ -32,18 +33,33 @@ namespace :scrape do
 			location_doc.css("table.stationdetails td")[2].text.match(/Name: ([A-Z\s]*)/)
 			id = $1.strip
 			id.tr!(' ','_')
-			googlemaps = JSON.parse(open("#{url}#{lat},#{long}&#{api}").read)
-			postcode = googlemaps["results"][0]["address_components"][-1]["long_name"]
+			googlemaps = JSON.parse(open("#{url}latlng=#{lat},#{long}&#{api}").read)
+			code = googlemaps["results"][0]["address_components"][-1]["long_name"]
+			components = "components=postal_code:#{code}|country:AU"
+			
+			googlemaps = JSON.parse(open(URI.encode("#{url}#{components}&#{api}")).read)
+			post_lat = googlemaps["results"][0]["geometry"]["location"]["lat"]
+			post_long = googlemaps["results"][0]["geometry"]["location"]["lng"]
 			# Update the location in the DB.
 			location = Location.find_or_initialize_by(name: name)
+			postcode = Postcode.find_or_initialize_by(code: code)
+			postcode.lat = post_lat
+			postcode.long = post_long
+			postcode.save if postcode.changed?
+
 			location.location_id = id
 			location.lat = lat
 			location.long = long
 			location.postcode = postcode
+			location.html_id = html_id
 			location.save if location.changed?
 		end
 	end
 	
+	task :forecast => :environment do
+
+	end
+
 	#Scrape data from forecast into DB
 	task :forecast => :environment do
 		@locations = Location.all

@@ -14,14 +14,15 @@ class Prediction < ActiveRecord::Base
 		return result_hash
 	end
 	
-	def self.predict_postcode postcode, period
-		if Location.find_by(postcode: postcode)
-			locations = Location.where(postcode: postcode)
+	def self.predict_postcode code, period
+		if postcode = Postcode.find_by(code: code)
+			locations = postcode.get_locations
 		else
-			locations = Location.get_nearest_location(postcode)
+			postcode = Postcode.new_postcode(code)
+			locations = postcode.get_location
 		end
 		data_hash = {}
-		result_hash = {:postcode => postcode, :predictions => {}}
+		result_hash = {:postcode => code, :predictions => {}}
 		first_measurement = Time.now
 		locations.each do |location|
 			if location.measurements.first.timestamp < first_measurement

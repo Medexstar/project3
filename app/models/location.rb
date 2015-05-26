@@ -3,6 +3,7 @@ require 'json'
 
 class Location < ActiveRecord::Base
 	has_many :measurements
+	belongs_to :postcode
 	# self.primary_key = :id
 	
 	def self.get_all_locations
@@ -56,34 +57,20 @@ class Location < ActiveRecord::Base
 		return measurements
 	end
 	
-	def self.get_nearest_location *args
-		if args.length == 2
-			lat = args[0]
-			long = args[1]
-			loc1 = [lat.to_f, long.to_f]
-			locations = Location.all
-			min_distance = Float::INFINITY
-			nearest_location = nil
-			locations.each do |location|
-				loc2 = [location.lat, location.long]
-				distance = haversine_distance(loc1, loc2)
-				if distance < min_distance
-					min_distance = distance
-					nearest_location = location
-				end
+	def self.get_nearest_location lat, long
+		loc1 = [lat.to_f, long.to_f]
+		locations = Location.all
+		min_distance = Float::INFINITY
+		nearest_location = nil
+		locations.each do |location|
+			loc2 = [location.lat, location.long]
+			distance = haversine_distance(loc1, loc2)
+			if distance < min_distance
+				min_distance = distance
+				nearest_location = location
 			end
-			return [nearest_location]
-		elsif args.length == 1
-			url = 'https://maps.googleapis.com/maps/api/geocode/json?'
-			api = 'key=AIzaSyC_ah2e2ctcBDwIYBZ1O8laWOpguNeBx5I'
-			postcode = args[0]
-			components = "components=postal_code:#{postcode}|country:AU"
-			
-			googlemaps = JSON.parse(open(URI.encode("#{url}#{components}&#{api}")).read)
-			lat = googlemaps["results"][0]["geometry"]["location"]["lat"]
-			long = googlemaps["results"][0]["geometry"]["location"]["lng"]
-			return get_nearest_location(lat, long)
 		end
+		return [nearest_location]
 	end
 	
 	def self.haversine_distance loc1, loc2
