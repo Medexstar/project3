@@ -22,10 +22,10 @@
     <% end %>
     <tr>
       <th class="text-center">Probability</th>
-      <td class="text-center"><%= @hash[:predictions]["0"][:temp][:probability].to_f.round(4) %></td>
-      <td class="text-center"><%= @hash[:predictions]["0"][:rain][:probability].to_f.round(4) %></td>
-      <td class="text-center"><%= @hash[:predictions]["0"][:wind_direction][:probability].to_f.round(4) %></td>
-      <td class="text-center"><%= @hash[:predictions]["0"][:wind_speed][:probability].to_f.round(4) %></td>
+      <th class="text-center"><%= @hash[:predictions]["0"][:temp][:probability].to_f.round(4) %></th>
+      <th class="text-center"><%= @hash[:predictions]["0"][:rain][:probability].to_f.round(4) %></th>
+      <th class="text-center"><%= @hash[:predictions]["0"][:wind_direction][:probability].to_f.round(4) %></th>
+      <th class="text-center"><%= @hash[:predictions]["0"][:wind_speed][:probability].to_f.round(4) %></th>
       </tr>
   </tbody>
 </table>
