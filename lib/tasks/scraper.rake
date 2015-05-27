@@ -78,17 +78,14 @@ namespace :scrape do
 			 	new_rainfall = data[12].text.to_f
 			 	new_wind_speed = data[7].text.to_f
 			 	new_wind_direction = data[6].text
-			 	new_time = data[0].text.to_datetime
+			 	new_time = Time.zone.parse(data[0].text).to_datetime
 			end
 			
 			#Convert rainfall since 9am to precipitation intensity (mm/h)
 			if location.measurements.empty? || location.measurements.last.timestamp <= (new_time-9.hours).change({hour:9})
 				new_precip_intensity = new_rainfall*3600/(new_time - (new_time-9.hours).change({hour:9}))
 			else
-				p new_time
-				p location.measurements.last.timestamp
 				new_precip_intensity = (new_rainfall - location.measurements.last.cumulative_rain)*3600/(new_time - location.measurements.last.timestamp)
-				p "test"
 			end				
 			
 			measurement = Measurement.new(
@@ -100,9 +97,9 @@ namespace :scrape do
 				timestamp: new_time
 			)
 
-			p measurement.timestamp
 			measurement.location = location
 			location.last_update = measurement.timestamp
+			
 			if new_rainfall >= 7.5
 				location.summary = "Heavy Rain"
 			elsif new_rainfall > 0
