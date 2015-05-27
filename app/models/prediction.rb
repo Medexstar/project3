@@ -63,7 +63,7 @@ class Prediction < ActiveRecord::Base
 			winddir_array << measurements[:winddir]
 			windspeed_array << measurements[:windspeed]
 		end
-		
+
 		(0..period.to_i/10).each do |time|
 			count = 0
 			hash[:predictions][(time*10).to_s] = {:time => (current_time + (time*10*60)).strftime("%-l:%M%P %d-%m-%Y")}

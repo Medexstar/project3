@@ -3,14 +3,30 @@ require 'matrix'
 class Regression < ActiveRecord::Base
 	attr_reader :r_sqrd, :coefficients
 	
+    def initialize time_array, y_array
+        @x_array = time_array
+        @y_array = y_array
+        calc_regression
+    end
+    
 	@coefficients = []
 	@r_sqrd = 0.0
     def self.calc_best_regression time_array, y_array
-    	poly = PolyRegression.new(time_array, y_array)
-        log = LogRegression.new(time_array, y_array)
+        temp_y_array = []
+        temp_x_array = []
+        
+        (0...y_array.size).each do |i|
+            if y_array[i] != nil
+                temp_x_array << time_array[i]
+                temp_y_array << y_array[i]
+            end
+        end
+        
+    	poly = PolyRegression.new(temp_x_array, temp_y_array)
+        log = LogRegression.new(temp_x_array, temp_y_array)
         #Check if y_array has negative numbers, to prevent domain errors
-        if y_array.min > 0
-            expo = ExpoRegression.new(time_array, y_array)
+        if temp_y_array.min > 0
+            expo = ExpoRegression.new(temp_x_array, temp_y_array)
             [poly, expo, log].max_by(&:r_sqrd)
         else
             [poly, log].max_by(&:r_sqrd)
@@ -44,11 +60,6 @@ class Regression < ActiveRecord::Base
 end
 
 class PolyRegression < Regression
-	def initialize time_array, y_array
-        @x_array = time_array
-        @y_array = y_array
-		calc_regression
-	end
 	
 	def calc_regression
 		r2_values = []
@@ -98,11 +109,6 @@ class PolyRegression < Regression
 end
 
 class ExpoRegression < Regression
-    def initialize time_array, y_array
-        @x_array = time_array
-        @y_array = y_array
-        calc_regression
-    end
     
     def calc_regression
         expo_reg
@@ -132,11 +138,6 @@ class ExpoRegression < Regression
 end
 
 class LogRegression < Regression
-    def initialize time_array, y_array
-        @x_array = time_array
-        @y_array = y_array
-        calc_regression
-    end
     
     def calc_regression
         log_reg
