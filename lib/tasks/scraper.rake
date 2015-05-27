@@ -71,7 +71,6 @@ namespace :scrape do
 			data = doc.css("td[headers~=#{id}]")
 		 
 			if (data.empty?)
-				puts "test"
 				next
 			else
 			 	new_temp = data[1].text
