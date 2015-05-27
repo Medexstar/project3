@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 20150526013740) do
 
   create_table "measurements", force: :cascade do |t|
     t.float    "temp"
+    t.float    "cumulative_rain"
     t.float    "precip_intensity"
     t.float    "wind_speed"
     t.float    "wind_direction"

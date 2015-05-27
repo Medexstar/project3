@@ -21,12 +21,15 @@ class Prediction < ActiveRecord::Base
 			postcode = Postcode.new_postcode(code)
 			locations = postcode.get_locations
 		end
+		@current_time = Time.now
 		data_hash = {}
 		result_hash = {:postcode => code, :predictions => {}}
 		first_measurement = Time.now
 		locations.each do |location|
-			if location.measurements.first.timestamp < first_measurement
-				first_measurement = location.measurements.first.timestamp
+			location.measurements.each do |measurement|
+				if measurement.timestamp < first_measurement && measurement.timestamp >= @current_time - 43200
+					first_measurement = measurement.timestamp
+				end
 			end
 		end
 		locations.each do |location|
@@ -40,6 +43,9 @@ class Prediction < ActiveRecord::Base
 	def self.get_data measurements, data_hash, first_measurement
 		
 		measurements.each do |data_point|
+			if data_point.timestamp < @current_time - 43200
+				next
+			end
 			data_hash[((data_point.timestamp - first_measurement)/60)+1] = {:rainfall => data_point.precip_intensity, :temp => data_point.temp, :winddir => data_point.wind_direction, :windspeed => data_point.wind_speed}
 		end
 	end

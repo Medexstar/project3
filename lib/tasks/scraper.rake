@@ -70,31 +70,61 @@ namespace :scrape do
 			puts "Scraping Station: #{location.name}"
 			data = doc.css("td[headers~=#{id}]")
 		 
+		 	#No data found for this location
 			if (data.empty?)
 				next
 			else
-			 	new_temp = data[1].text
-			 	new_rainfall = data[12].text
-			 	new_wind_speed = data[7].text
+			 	new_temp = data[1].text.to_f
+			 	new_rainfall = data[12].text.to_f
+			 	new_wind_speed = data[7].text.to_f
 			 	new_wind_direction = data[6].text
-			 	new_time = data[0].text
+			 	new_time = data[0].text.to_datetime
 			end
+			
+			#Convert rainfall since 9am to precipitation intensity (mm/h)
+			if location.measurements.empty? || location.measurements.last.timestamp <= (new_time-9.hours).change({hour:9})
+				new_precip_intensity = new_rainfall*3600/(new_time - (new_time-9.hours).change({hour:9}))
+			else
+				p new_time
+				p location.measurements.last.timestamp
+				new_precip_intensity = (new_rainfall - location.measurements.last.cumulative_rain)*3600/(new_time - location.measurements.last.timestamp)
+				p "test"
+			end				
 			
 			measurement = Measurement.new(
 				temp: new_temp,
-				precip_intensity: new_rainfall,
+				cumulative_rain: new_rainfall,
+				precip_intensity: new_precip_intensity,
 				wind_speed: new_wind_speed,
 				wind_direction: cardinal_direction_degrees(new_wind_direction),
 				timestamp: new_time
 			)
+
+			p measurement.timestamp
 			measurement.location = location
 			location.last_update = measurement.timestamp
-			location.summary = "Shitty"
-			if !location.measurements.exists?(:timestamp => measurement.timestamp)
+			if new_rainfall >= 7.5
+				location.summary = "Heavy Rain"
+			elsif new_rainfall > 0
+				location.summary = "Light Rain"
+			elsif new_wind_speed >= 40
+				location.summary = "Windy"
+			elsif new_temp >= 26
+				location.summary = "Hot"
+			elsif new_temp < 10
+				location.summary = "Cold"
+			else
+				location.summary = "Mild"
+			end
+			# if !location.measurements.exists?(:timestamp => measurement.timestamp)
 				measurement.save
 				location.save
-			end
+			# end
 		end
+	end
+	
+	def convert_to_precip_intensity time, last_measurement, rainfall
+		
 	end
 	
 	def cardinal_direction_degrees cardinal

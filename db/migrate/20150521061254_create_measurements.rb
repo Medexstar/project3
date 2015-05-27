@@ -2,6 +2,7 @@ class CreateMeasurements < ActiveRecord::Migration
   def change
     create_table :measurements do |t|
       t.float :temp
+      t.float :cumulative_rain
       t.float :precip_intensity
       t.float :wind_speed
       t.float :wind_direction
