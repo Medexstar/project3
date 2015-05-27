@@ -9,7 +9,7 @@ class Regression < ActiveRecord::Base
     	poly = PolyRegression.new(time_array, y_array)
         log = LogRegression.new(time_array, y_array)
         #Check if y_array has negative numbers, to prevent domain errors
-        if y_array.min >= 0
+        if y_array.min > 0
             expo = ExpoRegression.new(time_array, y_array)
             [poly, expo, log].max_by(&:r_sqrd)
         else

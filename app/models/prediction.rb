@@ -47,7 +47,7 @@ class Prediction < ActiveRecord::Base
 	def self.make_prediction data_hash, period, hash, first_measurement
 		current_time = Time.now
 		time_difference = current_time - first_measurement
-		names = [:rain, :temp, :wind_speed]
+		names = [:rain, :temp, :wind_direction, :wind_speed]
 		rainfall_array, temp_array, winddir_array, windspeed_array, time_array = [], [] ,[] ,[], []
 		
 		data_hash.each do |time, measurements|
@@ -63,7 +63,12 @@ class Prediction < ActiveRecord::Base
 			hash[:predictions][(time*10).to_s] = {:time => (current_time + (time*10*60)).strftime("%-l:%M%P %d-%m-%Y")}
 			[rainfall_array, temp_array, winddir_array, windspeed_array].each do |y_array|
 				reg = Regression.calc_best_regression(time_array, y_array)
-				value = reg.calc_prediction((time_difference/60 + time*10)+1).round(2)
+				value = reg.calc_prediction((time_difference/60 + time*10)+1)
+				if y_array == winddir_array
+					value = (value % 360).round(2)
+				else
+					value = value.round(2)
+				end
 				hash[:predictions][(time*10).to_s][names[count]] = {:value => value.to_s, :probability => reg.r_sqrd.to_s}
 				count += 1
 			end
