@@ -4,8 +4,9 @@ class Prediction < ActiveRecord::Base
 		if !location.last_update
 			return {}
 		end
+		@current_time = Time.now
 		data_hash = {}
-		result_hash = {:lattitude => lat, :longitude => long, :predictions => {}}
+		result_hash = {:latitude => lat, :longitude => long, :predictions => {}}
 		first_measurement = location.measurements.first.timestamp
 		
 		get_data(location.measurements.all, data_hash, first_measurement)
@@ -79,10 +80,13 @@ class Prediction < ActiveRecord::Base
 				reg = Regression.calc_best_regression(time_array, y_array)
 				value = reg.calc_prediction((time_difference/60 + time*10)+1)
 				if y_array == winddir_array
-					value = (value % 360).round(2)
-				else
-					value = value.round(2)
+					value = value % 360
+				elsif y_array == windspeed_array
+					if value < 0
+						value = 0.0
+					end
 				end
+				value = value.round(2)
 				hash[:predictions][(time*10).to_s][names[count]] = {:value => value.to_s, :probability => reg.r_sqrd.to_s}
 				count += 1
 			end
