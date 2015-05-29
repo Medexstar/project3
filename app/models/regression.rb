@@ -21,7 +21,6 @@ class Regression < ActiveRecord::Base
                 temp_y_array << y_array[i]
             end
         end
-        
     	poly = PolyRegression.new(temp_x_array, temp_y_array)
         log = LogRegression.new(temp_x_array, temp_y_array)
         #Check if y_array has negative numbers, to prevent domain errors
@@ -124,6 +123,7 @@ class ExpoRegression < Regression
         my = Matrix.column_vector(@y_array)
         @coefficients = ((mx.t * mx).inv * mx.t * my).transpose.to_a[0]
         @coefficients[0] = Math.exp(@coefficients[0])
+        @y_array = @y_array.map {|x| Math.exp(x)}
     end
     
     def calc_estimate
@@ -152,6 +152,7 @@ class LogRegression < Regression
         mx = Matrix[*x_data]
         my = Matrix.column_vector(@y_array)
         @coefficients = ((mx.t * mx).inv * mx.t * my).transpose.to_a[0]
+        @x_array = @x_array.map {|x| Math.exp(x)}
     end
     
     def calc_estimate

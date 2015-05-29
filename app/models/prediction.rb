@@ -46,7 +46,15 @@ class Prediction < ActiveRecord::Base
 			if data_point.timestamp < @current_time - 43200
 				next
 			end
-			data_hash[((data_point.timestamp - first_measurement)/60)+1] = {:rainfall => data_point.precip_intensity, :temp => data_point.temp, :winddir => data_point.wind_direction, :windspeed => data_point.wind_speed}
+			timestamp = ((data_point.timestamp - first_measurement)/60)+1
+			if !data_hash.has_key?(timestamp)
+				data_hash[timestamp] = {:rainfall => data_point.precip_intensity, :temp => data_point.temp, :winddir => data_point.wind_direction, :windspeed => data_point.wind_speed}
+			else
+				data_hash[timestamp][:rainfall] = (data_hash[timestamp][:rainfall] + data_point.precip_intensity)/2
+				data_hash[timestamp][:temp] = (data_hash[timestamp][:temp] + data_point.temp)/2
+				data_hash[timestamp][:winddir] = (data_hash[timestamp][:winddir] + data_point.wind_direction)/2
+				data_hash[timestamp][:windspeed] = (data_hash[timestamp][:windspeed] + data_point.wind_speed)/2
+			end	
 		end
 	end
 	
