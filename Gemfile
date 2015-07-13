@@ -43,8 +43,7 @@ group :development, :test do
 
   # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
   gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
-  # Use sqlite3 as the database for Active Record
-  gem 'sqlite3'
+  gem 'sqlite3-ruby', :require => 'sqlite3'
 end
 
 group :production do
