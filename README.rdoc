@@ -9,8 +9,8 @@ To run type:
 * rake db:migrate
 * rails s
 
-* API calls include:
 
+API calls include:
 * /weather/locations - to return all locations
 * /weather/data/:location_id/:date - return observations on :date (DD_MM_YYYY) in :location_id (eg. CHARLTON)
 * /weather/data/:post_code/:date - return observations on :date in :post_code
