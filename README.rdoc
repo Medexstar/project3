@@ -1,6 +1,8 @@
 == README
 
 Rails application to view Weather observations in Victoria
+
+
 To run type:
 * bundle install
 * rake db:create
