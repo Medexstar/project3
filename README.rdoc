@@ -1,28 +1,16 @@
 == README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Rails application to view Weather observations in Victoria
+To run type:
+bundle install
+rake db:create
+rake db:migrate
+rails s
 
-Things you may want to cover:
+API calls include:
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+/weather/locations - to return all locations
+/weather/data/:location_id/:date - return observations on :date (DD_MM_YYYY) in :location_id (eg. CHARLTON)
+/weather/data/:post_code/:date - return observations on :date in :post_code
+/weather/prediction/:post_code/:period - return prediction observations for nearest :post_code for a certain time :period N minutes ahead in 10 minute intervals (30 = predict 30 minutes into the future from 0, 10, 20, 30)
+/weather/prediction/:lat/:long/:period - return prediction observatiosn for nearest :lat, :long to an observation station for a certain time :period N minutes ahead in 10 minute intervals
